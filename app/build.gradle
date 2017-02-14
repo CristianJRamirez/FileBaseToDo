@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "a45858000w.filebasetodo"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
