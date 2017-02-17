@@ -5,17 +5,24 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Gallery;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,22 +72,25 @@ public class MainActivityFragment extends Fragment {
     private String pathVideoTemporal;
     private static final int REQUEST_TAKE_PHOTO = 1;
     private static final int CAPTURE_VIDEO_ACTIVITY_REQUEST_CODE = 200;
+    private GridView gridview;
+    private GridViewImageAdapter adaptador;
+    FirebaseDatabase database;
+    private DatabaseReference todosRef;
+
+
 
     public MainActivityFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_main, container, false);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference todosRef = database.getReference("todos");
+        database = FirebaseDatabase.getInstance();
+        todosRef = database.getReference("todos");
 
 
-        list =(ListView) view.findViewById(R.id.listView);
-        txtInsert= (EditText) view.findViewById(R.id.txtInsert);
-        btAdd = (Button) view.findViewById(R.id.btAdd);
+
 
         btCamara = (Button) view.findViewById(R.id.btCamara);
 
@@ -90,7 +100,7 @@ public class MainActivityFragment extends Fragment {
 
         listaDatos= new ArrayList<String>();
         //adapter = new ArrayAdapter<>(this, R.layout.listaitem, listaDatos);
-
+/*
         adapter = new FirebaseListAdapter<String>(this.getActivity(), String.class, R.layout.listaitem, todosRef) {
             @Override
             protected void populateView(View v, String model, int position) {
@@ -99,31 +109,10 @@ public class MainActivityFragment extends Fragment {
             }
         };
 
-        list.setAdapter(adapter);
+        list.setAdapter(adapter);*/
 
 
 
-        btAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (txtInsert.getText().length()>0)
-                {
-                    String datos=txtInsert.getText().toString();
-
-                    //adapter.add(datos);
-                    //myAdapter.add(datos);
-
-                    //txtInsert.setText("");
-
-
-                    if(!datos.equals("")){
-                        DatabaseReference newReference = todosRef.push();
-                        newReference.setValue(datos);
-                        txtInsert.setText("");
-                    }
-                }
-            }
-        });
 
 
         btCamara.setOnClickListener(new View.OnClickListener() {
@@ -141,11 +130,34 @@ public class MainActivityFragment extends Fragment {
             }
         });
 
+        gridview = (GridView) view.findViewById(R.id.grdGaleria);
+        // crear el gridview a partir del elemento del xml gridview
+
+
+        //gridview.setAdapter( new GridViewImageAdapter(getContext()) );
+
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int
+                    position, long id) {
+
+                Toast.makeText(getContext(), "" + position,Toast.LENGTH_SHORT).show();        }});
+
+
+
+
+
+
 
 
 
         return view;
     }
+
+
+
+
+
 
     private void setupAuth() {
         auth = FirebaseAuth.getInstance();
@@ -281,6 +293,10 @@ public class MainActivityFragment extends Fragment {
 
                         int indexColumna = cursor.getColumnIndex(columna[0]);
                         String rutaFitxer = cursor.getString(indexColumna);
+                        if(!rutaFitxer.equals("")){
+                             DatabaseReference newReference = todosRef.push();
+                             newReference.setValue(rutaFitxer);
+                        }
                         cursor.close();
                     }
                 }
@@ -300,6 +316,10 @@ public class MainActivityFragment extends Fragment {
 
                         int indexColumna = cursor.getColumnIndex(columna[0]);
                         String rutaFitxer = cursor.getString(indexColumna);
+                        if(!rutaFitxer.equals("")){
+                            DatabaseReference newReference = todosRef.push();
+                            newReference.setValue(rutaFitxer);
+                        }
                         cursor.close();
 
                     } else if (resultCode == RESULT_CANCELED) {
@@ -310,12 +330,18 @@ public class MainActivityFragment extends Fragment {
                 }
 
 
+
             }catch (Exception e) {
                 e.printStackTrace();
 
             }
 
     }
+
+
+
+
+
 
 
 

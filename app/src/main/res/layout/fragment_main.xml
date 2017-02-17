@@ -9,49 +9,6 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btAdd"
-        app:layout_constraintBottom_toBottomOf="@+id/btCamara"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/btCamara"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintTop_toTopOf="@+id/btCamara" />
-
-    <EditText
-        android:layout_width="55dp"
-        android:layout_height="42dp"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/txtInsert"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp" />
-
-    <ListView
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtInsert"
-        android:layout_marginBottom="32dp"
-        android:id="@+id/listView" />
-
-    <Button
         android:text="Camara"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,17 +17,49 @@
         app:layout_constraintLeft_toRightOf="@+id/btVideo"
         android:layout_marginLeft="8dp"
         app:layout_constraintTop_toTopOf="@+id/btVideo"
-        app:layout_constraintBottom_toBottomOf="@+id/btVideo" />
+        app:layout_constraintBottom_toBottomOf="@+id/btVideo"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        app:layout_constraintHorizontal_bias="0.92" />
 
     <Button
         android:text="Video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btVideo"
-        android:layout_marginStart="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/txtInsert"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/txtInsert"
-        app:layout_constraintTop_toTopOf="@+id/txtInsert" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/grdGaleria" />
+
+    <GridView
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_height="366dp"
+        android:layout_width="352dp"
+        android:id="@+id/grdGaleria"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintVertical_bias="0.0"
+
+        android:columnWidth="90dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"/>
+
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>

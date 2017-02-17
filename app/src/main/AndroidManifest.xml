@@ -2,11 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="a45858000w.filebasetodo">
 
-    <!-- Necessitem permís per crear fitxers en la sd-->
+    <!-- Necessitem permís per crear fitxers en la sd -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!--Ens assegurem de que sols els dispositius en càmera puguen instal·lar la nostra app-->
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <!-- Ens assegurem de que sols els dispositius en càmera puguen instal·lar la nostra app -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
